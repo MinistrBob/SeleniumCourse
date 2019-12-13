@@ -1,31 +1,21 @@
 import math
 import time
 from selenium import webdriver
-
-
-def calc(x):
-    return str(math.log(abs(12 * math.sin(int(x)))))
-
+from selenium.webdriver.support.ui import Select
 
 try:
-    link = "http://suninjuly.github.io/math.html"
+    link = "http://suninjuly.github.io/selects1.html"
     browser = webdriver.Chrome()
     browser.get(link)
 
-    x_element = browser.find_element_by_css_selector("#input_value")
-    x = x_element.text
-    y = calc(x)
-    print(x, y)
+    el1 = browser.find_element_by_css_selector("#num1")
+    num1 = el1.text
+    el2 = browser.find_element_by_css_selector("#num2")
+    num2 = el2.text
+    sum_ = str(int(num1) + int(num2))
 
-    el1 = browser.find_element_by_css_selector("#answer")
-    el1.send_keys(str(y))
-
-    el2 = browser.find_element_by_css_selector("#robotCheckbox")
-    el2.click()
-
-    el3 = browser.find_element_by_css_selector("#robotsRule")
-    el3.click()
-
+    select = Select(browser.find_element_by_tag_name("#dropdown"))
+    select.select_by_value(sum_)  # ищем элемент с текстом "Python"
 
     # Отправляем заполненную форму
     button = browser.find_element_by_css_selector(".btn.btn-default")
